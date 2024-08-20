@@ -3,7 +3,7 @@ if not game:IsLoaded() then
 end
 
 if _G.AutoExecuterExe == true then
-local ScriptSpawnExecuteUiLib = queueonteleport or queue_on_teleport or syn and syn.queue_on_teleport
+local ScriptSpawnExecuteUiLib = queueonteleport or queue_on_teleport
 if ScriptSpawnExecuteUiLib then
     ScriptSpawnExecuteUiLib([[
 if not game:IsLoaded() then
@@ -12,7 +12,7 @@ end
 repeat wait() until game.Players.LocalPlayer
 wait(0.25)
 _G.AutoExecuterExe = true
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Giangplay/Script/main/Execute%20%7C%20UI%20Library.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Playgiang/Script/main/Execute.lua"))()
     ]])
 else
 game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Error",Text = "You cannot auto execute",Icon = "rbxassetid://7733658504",Duration = 5})
@@ -121,20 +121,10 @@ KeyCodeBo = game:GetService("UserInputService").InputBegan:Connect(function(inpu
 if _G.KeyboardExecute == true then
 if input.KeyCode == _G.ExecuteKey["Execute"] then
 if game.CoreGui:FindFirstChild("Execute") and game.CoreGui.Execute:FindFirstChild("Frame") and game.CoreGui.Execute.Frame:FindFirstChild("ScriptTextBox") then
-if identifyexecutor() == "Fluxus" then
 for i,v in pairs(game.CoreGui.Execute.Frame:GetChildren()) do
 if v:IsA("TextBox") then
 if v.Visible == true then
 loadstring(v.Text)()
-end
-end
-end
-else
-for i,v in pairs(game.CoreGui.Execute.Frame:GetChildren()) do
-if v:IsA("TextBox") then
-if v.Visible == true then
-runcode(v.Text)
-end
 end
 end
 end
@@ -256,20 +246,10 @@ TextButton.BackgroundTransparency = 0
 TextButton.TextColor3 = Color3.new(0,0,0)
 TextButton.Parent = Frame
 TextButton.MouseButton1Click:Connect(function()
-if identifyexecutor() == "Fluxus" then
 for i,v in pairs(game.CoreGui.Execute.Frame:GetChildren()) do
 if v:IsA("TextBox") then
 if v.Visible == true then
 loadstring(v.Text)()
-end
-end
-end
-else
-for i,v in pairs(game.CoreGui.Execute.Frame:GetChildren()) do
-if v:IsA("TextBox") then
-if v.Visible == true then
-runcode(v.Text)
-end
 end
 end
 end
@@ -1283,11 +1263,7 @@ ButtonExe.BackgroundTransparency = 0
 ButtonExe.TextColor3 = Color3.new(0, 0, 0)
 ButtonExe.Parent = SaveLabel
 ButtonExe.MouseButton1Click:Connect(function()
-if identifyexecutor() == "Fluxus" then
     loadstring(SaveGet.Script)()
-else
-    runcode(SaveGet.Script)
-end
 end)
 
 local ButtonDelete = Instance.new("TextButton")
@@ -1413,11 +1389,7 @@ TextButton.TextSize = 9
 TextButton.TextColor3 = Color3.new(0,0,0)
 TextButton.Parent = ImageLabel
 TextButton.MouseButton1Click:Connect(function()
-if identifyexecutor() == "Fluxus" then
     loadstring(source)()
-    else
-    runcode(source)
-end
 end)
 
 local TextButton = Instance.new("TextButton")
@@ -1459,7 +1431,6 @@ TextButton.TextSize = 9
 TextButton.TextColor3 = Color3.new(0,0,0)
 TextButton.Parent = ImageLabel
 TextButton.MouseButton1Click:Connect(function()
-game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Save Script",Text = "Save Success.",Icon = "rbxassetid://7733658504",Duration = 4})
 SavedScriptsAdd({Name = scriptname..".txt", Script = source, ScriptSave = source})
 writefile("ExecuteGet/"..scriptname..".txt", source)
 end)
@@ -1518,6 +1489,29 @@ UIListLayout.Parent = ScrollingFrame
 local Padding = Instance.new("UIPadding")
 Padding.PaddingTop = UDim.new(0, 8)
 Padding.Parent = ScrollingFrame
+
+local TextButton = Instance.new("TextButton")
+TextButton.Name = "Normal"
+TextButton.Size = UDim2.new(0.8, 0, 0.23, 0)
+TextButton.Position = UDim2.new(0, 0, 0, 0)
+TextButton.BackgroundColor3 = Color3.new(255, 255, 255)
+TextButton.Text = "Normal"
+TextButton.TextSize = 10
+TextButton.BackgroundTransparency = 0 
+TextButton.TextColor3 = Color3.new(0, 0, 0)
+TextButton.Parent = ScrollingFrame
+TextButton.MouseButton1Down:connect(function()
+for i,v in pairs(game.CoreGui.Execute.Frame:GetChildren()) do
+if v:IsA("TextBox") then
+if v.Visible == true then
+v.Visible = false
+end
+end
+end
+if game.CoreGui.Execute.Frame:FindFirstChild("ScriptTextBox").Visible == false then
+game.CoreGui.Execute.Frame:FindFirstChild("ScriptTextBox").Visible = true
+end
+end)
 
 function CreateButtonTab(Scripts)
 Scripts.Name = Scripts.Name
@@ -2562,7 +2556,7 @@ ShiftLockButton.MouseButton1Click:Connect(function()
                     ShiftlockCursor.Visible = true
                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position, Vector3.new(workspace.CurrentCamera.CFrame.LookVector.X * 900000, game.Players.LocalPlayer.Character.HumanoidRootPart.Position.Y, workspace.CurrentCamera.CFrame.LookVector.Z * 900000))
                     workspace.CurrentCamera.CFrame = workspace.CurrentCamera.CFrame * CFrame.new(1.7, 0, 0)
-                    workspace.CurrentCamera.Focus =CFrame.fromMatrix(workspace.CurrentCamera.Focus.Position, workspace.CurrentCamera.CFrame.RightVector, workspace.CurrentCamera.CFrame.UpVector) * CFrame.new(1.7, 0, 0)
+                    workspace.CurrentCamera.Focus = CFrame.fromMatrix(workspace.CurrentCamera.Focus.Position, workspace.CurrentCamera.CFrame.RightVector, workspace.CurrentCamera.CFrame.UpVector) * CFrame.new(1.7, 0, 0)
                 end)
         else
             game.Players.LocalPlayer.Character.Humanoid.AutoRotate = true
