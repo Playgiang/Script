@@ -8,6 +8,7 @@ print("Key P [ Check ]")
 print("Key T [ Teleport ]")
 print("Key E [ Convert in Position / CFrame ]") 
 print("Key A [ Auto Check ]") 
+print("Key K [ Auto Teleport ]") 
 
 KeyCodeBo = game:GetService("UserInputService").InputBegan:Connect(function(input)
 if game.CoreGui:FindFirstChild("PositionGui") and game.CoreGui.PositionGui:FindFirstChild("PositionYour") then
@@ -42,6 +43,25 @@ elseif game.CoreGui.PositionGui.PositionYour.CheckUse.Text == "You Using CFrame"
 game.CoreGui.PositionGui.PositionYour.Check.Text = tostring(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
 end
 end
+task.wait()
+end
+elseif input.KeyCode == Enum.KeyCode.K then
+_G.Auto2 = not _G.Auto2
+while _G.Auto2 do
+local ValuesTele = {}
+        for Value in string.gmatch(game.CoreGui.PositionGui.PositionYour.Check.Text, "[^, ]+") do
+            table.insert(ValuesTele, tonumber(Value))
+        end        
+        if #ValuesTele >= 3 then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(ValuesTele[1], ValuesTele[2], ValuesTele[3]))
+        else
+         local success, CheckCFrame = pcall(function()
+            return loadstring("return "..game.CoreGui.PositionGui.PositionYour.Check.Text)()
+        end)
+        if success and typeof(CheckCFrame) == "CFrame" then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CheckCFrame
+        end
+    end
 task.wait()
 end
 end
@@ -126,8 +146,20 @@ TextButton.Text = "Teleport"
 TextButton.TextColor3 = Color3.new(0,0,0)
 TextButton.Parent = Frame
 TextButton.MouseButton1Click:Connect(function()
-_G.TeleportGet = tostring(game.CoreGui.PositionGui.PositionYour.Check.Text)
-game.Players.LocalPlayer.Character:MoveTo(_G.TeleportGet)
+local ValuesTele = {}
+        for Value in string.gmatch(game.CoreGui.PositionGui.PositionYour.Check.Text, "[^, ]+") do
+            table.insert(ValuesTele, tonumber(Value))
+        end        
+        if #ValuesTele >= 3 then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(ValuesTele[1], ValuesTele[2], ValuesTele[3]))
+        else
+         local success, CheckCFrame = pcall(function()
+            return loadstring("return "..game.CoreGui.PositionGui.PositionYour.Check.Text)()
+        end)
+        if success and typeof(CheckCFrame) == "CFrame" then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CheckCFrame
+        end
+    end
 end)
 
 local TextButton = Instance.new("TextButton")
@@ -180,6 +212,9 @@ pcall(function()
 if _G.Auto == true then
 _G.Auto = false
 _G.Auto = nil
+elseif _G.Auto2 == true then
+_G.Auto2 = false
+_G.Auto2 = nil
 end
 if Active then
    Active:Disconnect()
