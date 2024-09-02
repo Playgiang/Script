@@ -19,6 +19,10 @@ game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Error",Text =
 end
 end
 
+function identifyexecutor()
+   return "Executor | Ui Library"
+end
+
 if game.CoreGui:FindFirstChild("Execute") == nil then
 local gui = Instance.new("ScreenGui")
 gui.Name = "Execute"
@@ -429,6 +433,14 @@ game.CoreGui.Execute.Frame26.Visible = false
 end
 end)
 
+ButtonChoose("Dex V0.5", function()
+if game.CoreGui.Execute.Frame29.Visible == false then
+game.CoreGui.Execute.Frame29.Visible = true
+else
+game.CoreGui.Execute.Frame29.Visible = false
+end
+end)
+
 --------// Clone Frame 6 \\---------
 
 local Frame6New = Instance.new("Frame")
@@ -532,6 +544,14 @@ if game.CoreGui.Execute.Frame26.Visible == false then
 game.CoreGui.Execute.Frame26.Visible = true
 else
 game.CoreGui.Execute.Frame26.Visible = false
+end
+end)
+
+ButtonChooseClone("Dex V0.5", function()
+if game.CoreGui.Execute.Frame29.Visible == false then
+game.CoreGui.Execute.Frame29.Visible = true
+else
+game.CoreGui.Execute.Frame29.Visible = false
 end
 end)
 
@@ -2512,6 +2532,123 @@ game.CoreGui.Execute.Frame20.CheckUse1.Text = "Player Using CFrame"
 game.CoreGui.Execute.Frame20.Getcheck1.Text = "Convert In [ Position ]"
 game.CoreGui.Execute.Frame20.Check1.Text = tostring(game.Players[_G.GetPlayerGot].Character.HumanoidRootPart.CFrame)
 end
+end)
+
+-----// Dex V0.5 \\------
+
+local Frame29 = Instance.new("Frame")
+Frame29.Name = "Frame29"
+Frame29.Size = UDim2.new(0.45, 0, 0.7, 0)
+Frame29.Position = UDim2.new(0.2, 0, 0.1, 0)
+Frame29.BackgroundColor3 = Color3.new(1, 1, 1)
+Frame29.Active = true
+Frame29.BackgroundTransparency = 0 
+Frame29.Draggable = true
+Frame29.Visible = false
+Frame29.Parent = gui
+
+local TextLabel = Instance.new("TextLabel")
+TextLabel.Size = UDim2.new(1, 0, 0.15, 0)
+TextLabel.Position = UDim2.new(0, 0, 0, 0)
+TextLabel.BackgroundColor3 = Color3.new(255, 255, 255)
+TextLabel.Text = "Dex V0.5"
+TextLabel.TextSize = 10
+TextLabel.BackgroundTransparency = 0 
+TextLabel.TextColor3 = Color3.new(0, 0, 0)
+TextLabel.Parent = Frame29
+
+local TextButton = Instance.new("TextButton")
+TextButton.Size = UDim2.new(0.13, 0, 1, 0)
+TextButton.Position = UDim2.new(0.87, 0, 0, 0)
+TextButton.BackgroundColor3 = Color3.new(255, 255, 255)
+TextButton.Text = "X"
+TextButton.TextSize = 13
+TextButton.BackgroundTransparency = 1
+TextButton.TextColor3 = Color3.new(0, 0, 0)
+TextButton.Parent = TextLabel
+TextButton.MouseButton1Click:Connect(function()
+game.CoreGui.Execute.Frame29.Visible = false
+end)
+
+local TextButton = Instance.new("TextButton")
+TextButton.Size = UDim2.new(0.3, 0, 0.13, 0)
+TextButton.Position = UDim2.new(0.03, 0, 0.2, 0)
+TextButton.BackgroundColor3 = Color3.new(255, 255, 255)
+TextButton.Text = "Copy"
+TextButton.TextSize = 10
+TextButton.BackgroundTransparency = 0 
+TextButton.TextColor3 = Color3.new(0, 0, 0)
+TextButton.Parent = Frame29
+TextButton.MouseButton1Click:Connect(function()
+if setclipboard then
+setclipboard(game.CoreGui.Execute.Frame29.TextBox.Text)
+end
+end)
+
+local TextButton = Instance.new("TextButton")
+TextButton.Size = UDim2.new(0.3, 0, 0.13, 0)
+TextButton.Position = UDim2.new(0.35, 0, 0.2, 0)
+TextButton.BackgroundColor3 = Color3.new(255, 255, 255)
+TextButton.Text = "Clear"
+TextButton.TextSize = 10
+TextButton.BackgroundTransparency = 0 
+TextButton.TextColor3 = Color3.new(0, 0, 0)
+TextButton.Parent = Frame29
+TextButton.MouseButton1Click:Connect(function()
+game.CoreGui.Execute.Frame29.TextBox.Text = ""
+end)
+
+_G.ToggleDex = false
+local TextButton = Instance.new("TextButton")
+TextButton.Size = UDim2.new(0.3, 0, 0.13, 0)
+TextButton.Position = UDim2.new(0.67, 0, 0.2, 0)
+TextButton.BackgroundColor3 = Color3.new(255, 255, 255)
+TextButton.Text = "OFF"
+TextButton.TextSize = 10
+TextButton.BackgroundTransparency = 0 
+TextButton.TextColor3 = Color3.new(0, 0, 0)
+TextButton.Parent = Frame29
+TextButton.MouseButton1Click:Connect(function()
+_G.ToggleDex = not _G.ToggleDex
+if _G.ToggleDex == true then
+TextButton.Text = "ON"
+else
+TextButton.Text = "OFF"
+end
+end)
+
+local TextBox = Instance.new("TextBox")
+TextBox.Size = UDim2.new(0.94, 0, 0.6, 0)
+TextBox.Position = UDim2.new(0.03, 0, 0.35, 0)
+TextBox.BackgroundColor3 = Color3.new(255,255,255)
+TextBox.Text = ""
+TextBox.TextWrapped = true
+TextBox.ClipsDescendants = true
+TextBox.MultiLine = true
+TextBox.ClearTextOnFocus = false
+TextBox.TextColor3 = Color3.new(0,0,0)
+TextBox.TextSize = 10
+TextBox.Parent = Frame29
+
+local mouse = game.Players.LocalPlayer:GetMouse()
+mouse.Button1Down:Connect(function()
+if _G.ToggleDex == true then
+    local target = mouse.Target
+    if target then
+        local path = {}
+        local current = target
+        while current and current.Parent do
+            table.insert(path, 1, current.Name)
+            current = current.Parent
+        end
+        if path[#path] ~= "game" then
+            table.insert(path, 1, "game")
+        end
+        TextBox.Text = table.concat(path, " -> ")
+    else
+        TextBox.Text = "No target"
+    end
+    end
 end)
 
 ------// Shiftlock \\--------
