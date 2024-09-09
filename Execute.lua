@@ -24,9 +24,8 @@ function identifyexecutor()
 end
 
 if game.CoreGui:FindFirstChild("Execute") == nil then
-local gui = Instance.new("ScreenGui")
+local gui = Instance.new("ScreenGui", game.CoreGui)
 gui.Name = "Execute"
-gui.Parent = gethui()
 
 if game.CoreGui.Execute:FindFirstChild("ToggleUi1") == nil then
 local TOGGLE = {}
