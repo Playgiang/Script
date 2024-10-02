@@ -1,9 +1,9 @@
-# Orion Library
-This documentation is for the stable release of Orion Library.
+# Orion Library PE V2
+This Example is for the stable release of Orion Library For Mobile.
 
 ## Booting the Library
 ```lua
-local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Playgiang/Script/refs/heads/main/Orion_Library_PE_V2.lua')))()
 ```
 
 
@@ -13,6 +13,7 @@ local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shl
 local Window = OrionLib:MakeWindow({Name = "Title of the library", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
 
 --[[
+Introtoggle = <decal id>
 Name = <string> - The name of the UI.
 HidePremium = <bool> - Whether or not the user details shows Premium status or not.
 SaveConfig = <bool> - Toggles the config saving in the UI.
