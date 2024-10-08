@@ -586,7 +586,7 @@ function OrionLib:MakeWindow(WindowConfig)
 			WindowTopBarLine,
 			AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 7), {
 				Size = UDim2.new(0, 40, 0, 30),
-				Position = UDim2.new(1, -150, 0, 10)
+				Position = UDim2.new(1, -20, 0, 10)
 			}), {
 				AddThemeObject(MakeElement("Stroke"), "Stroke"),
 				AddThemeObject(SetProps(MakeElement("Frame"), {
