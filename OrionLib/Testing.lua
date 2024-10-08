@@ -585,8 +585,8 @@ function OrionLib:MakeWindow(WindowConfig)
 			WindowName,
 			WindowTopBarLine,
 			AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 7), {
-				Size = UDim2.new(0, 50, 0, 30),
-				Position = UDim2.new(1, -110, 0, 10)
+				Size = UDim2.new(0, 40, 0, 30),
+				Position = UDim2.new(1, -150, 0, 10)
 			}), {
 				AddThemeObject(MakeElement("Stroke"), "Stroke"),
 				AddThemeObject(SetProps(MakeElement("Frame"), {
@@ -627,7 +627,62 @@ function OrionLib:MakeWindow(WindowConfig)
 		MakeElement("Corner", 1)
 	})
 
-	
+	local gui = Instance.new("ScreenGui")
+gui.Name = "patrickGui"
+gui.Parent = game.CoreGui
+
+local cell = Instance.new("TextButton")
+cell.Size = UDim2.new(0, 274.5, 0, 50)
+cell.Position = UDim2.new(0, 0, 0, 0)
+cell.BackgroundColor3 = Color3.new(0, 0, 0)
+cell.BorderColor3 = Color3.new(0, 0, 0)
+cell.BorderSizePixel = 1
+cell.Active = true
+cell.BackgroundTransparency = 0.27
+cell.Draggable = true
+cell.Text = ""
+cell.Parent = game:GetService("CoreGui").TopBarApp.TopBarFrame.RightFrame.MoreMenu.MoreMenuContainer.ContextualMenu.PositionFrame.BaseMenu.ClippingFrame.ScrollingFrame
+
+local icon = Instance.new("ImageLabel")
+icon.Size = UDim2.new(0, 36, 0, 36)
+icon.Position = UDim2.new(0, 10, 0, 10)
+icon.BackgroundColor3 = Color3.new(0, 0, 0)
+icon.BackgroundTransparency = 1
+icon.Image = "rbxasset://textures/ui/TopBar/leaderboardOff.png"
+icon.Parent = cell
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, -70, 1, 0)
+Title.Position = UDim2.new(0, 57, 0, 0)
+Title.BackgroundColor3 = Color3.new(0, 0, 0)
+Title.BorderColor3 = Color3.new(0, 0, 0)
+Title.BorderSizePixel = 1
+Title.Text = "OrionLib"
+Title.TextSize = 20
+Title.BackgroundTransparency = 1
+Title.TextColor3 = Color3.new(1, 1, 1)
+Title.Font = Enum.Font.SourceSansBold
+Title.TextXAlignment = Enum.TextXAlignment.Left
+Title.Parent = cell
+
+cell.MouseEnter:Connect(function()
+    cell.BackgroundTransparency = 0.05
+    icon.Image = "rbxasset://textures/ui/TopBar/leaderboardOff.png"
+end)
+
+cell.MouseLeave:Connect(function()
+    cell.BackgroundTransparency = 0.27
+    icon.Image = "rbxasset://textures/ui/TopBar/leaderboardOff.png"
+end)
+
+local toggleState = false
+
+cell.MouseButton1Click:Connect(function()
+    toggleState = not toggleState
+    MainWindow.Visible = not toggleState
+    icon.Image = toggleState and "rbxasset://textures/ui/TopBar/leaderboardOn.png" or "rbxasset://textures/ui/TopBar/leaderboardOff.png"
+    print("hello")
+end)
 
 	AddConnection(UserInputService.InputBegan, function(Input)
 		if Input.KeyCode == Enum.KeyCode.LeftControl and UIHidden == true then
