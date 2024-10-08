@@ -590,7 +590,7 @@ function OrionLib:MakeWindow(WindowConfig)
 			}), {
 				AddThemeObject(MakeElement("Stroke"), "Stroke"),
 				AddThemeObject(SetProps(MakeElement("Frame"), {
-					Size = UDim2.new(0, 1, 1, 0),
+					Size = UDim2.new(0, 0.5, 1, 0),
 					Position = UDim2.new(0.5, 0, 0, 0)
 				}), "Stroke"), 
 				MinimizeBtn
@@ -654,7 +654,7 @@ function OrionLib:MakeWindow(WindowConfig)
 			WindowTopBarLine.Visible = false
 			MinimizeBtn.Ico.Image = "rbxassetid://7072720870"
 
-			TweenService:Create(MainWindow, TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Size = UDim2.new(0,140, 0, 50)}):Play()
+			TweenService:Create(MainWindow, TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Size = UDim2.new(0,615, 0, 50)}):Play()
 			wait(0.1)
 			WindowStuff.Visible = false	
 		end
