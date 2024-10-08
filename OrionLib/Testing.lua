@@ -491,7 +491,7 @@ function OrionLib:MakeWindow(WindowConfig)
 		BackgroundTransparency = 1
 	}), {
 		AddThemeObject(SetProps(MakeElement("Image", "rbxassetid://7072719338"), {
-			Position = UDim2.new(0, 9, 0, 6),
+			Position = UDim2.new(0, 9, 0, 4),
 			Size = UDim2.new(0, 18, 0, 18),
 			Name = "Ico"
 		}), "Text")
@@ -585,7 +585,7 @@ function OrionLib:MakeWindow(WindowConfig)
 			WindowName,
 			WindowTopBarLine,
 			AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 7), {
-				Size = UDim2.new(0, 40, 0, 30),
+				Size = UDim2.new(0, 50, 0, 30),
 				Position = UDim2.new(1, -110, 0, 10)
 			}), {
 				AddThemeObject(MakeElement("Stroke"), "Stroke"),
