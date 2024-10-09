@@ -627,10 +627,6 @@ function OrionLib:MakeWindow(WindowConfig)
 		MakeElement("Corner", 1)
 	})
 
-	local gui = Instance.new("ScreenGui")
-gui.Name = "patrickGui"
-gui.Parent = game.CoreGui
-
 local cell = Instance.new("TextButton")
 cell.Size = UDim2.new(0, 274.5, 0, 50)
 cell.Position = UDim2.new(0, 0, 0, 0)
@@ -1914,6 +1910,7 @@ end
 
 function OrionLib:Destroy()
 	Orion:Destroy()
+	cell:Destroy()
 end
 
 return OrionLib
