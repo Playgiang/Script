@@ -487,7 +487,7 @@ function OrionLib:MakeWindow(WindowConfig)
 	
 
 	local MinimizeBtn = SetChildren(SetProps(MakeElement("Button"), {
-		Size = UDim2.new(0.5, 0, 1, 0),
+		Size = UDim2.new(1, 0, 1, 0),
 		BackgroundTransparency = 1
 	}), {
 		AddThemeObject(SetProps(MakeElement("Image", "rbxassetid://7072719338"), {
@@ -611,64 +611,48 @@ function OrionLib:MakeWindow(WindowConfig)
 
 	MakeDraggable(DragPoint, MainWindow)
 
-    local MobileReopenButton = SetChildren(SetProps(MakeElement("Button"), {
-		Parent = Orion,
-		Size = UDim2.new(0, 40, 0, 40),
-		Position = UDim2.new(0.5, -20, 0, 20),
-		BackgroundTransparency = 0,
-		BackgroundColor3 = OrionLib.Themes[OrionLib.SelectedTheme].Main,
-		Visible = false
-	}), {
-		AddThemeObject(SetProps(MakeElement("Image", WindowConfig.IntroToggleIcon or "http://www.roblox.com/asset/?id=8834748103"), {
-			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = UDim2.new(0.5, 0, 0.5, 0),
-			Size = UDim2.new(0.7, 0, 0.7, 0),
-		}), "Text"),
-		MakeElement("Corner", 1)
-	})
 
-local cell = Instance.new("TextButton")
-cell.Size = UDim2.new(0, 274.5, 0, 50)
-cell.Position = UDim2.new(0, 0, 0, 0)
-cell.BackgroundColor3 = Color3.new(0, 0, 0)
-cell.BorderColor3 = Color3.new(0, 0, 0)
-cell.BorderSizePixel = 1
-cell.Active = true
-cell.BackgroundTransparency = 0.27
-cell.Draggable = true
-cell.Text = ""
-cell.Parent = game:GetService("CoreGui").TopBarApp.TopBarFrame.RightFrame.MoreMenu.MoreMenuContainer.ContextualMenu.PositionFrame.BaseMenu.ClippingFrame.ScrollingFrame
-
-local icon = Instance.new("ImageLabel")
-icon.Size = UDim2.new(0, 36, 0, 36)
-icon.Position = UDim2.new(0, 10, 0, 10)
-icon.BackgroundColor3 = Color3.new(0, 0, 0)
-icon.BackgroundTransparency = 1
-icon.Image = "rbxasset://textures/ui/TopBar/leaderboardOff.png"
-icon.Parent = cell
-
-local Title = Instance.new("TextLabel")
-Title.Size = UDim2.new(1, -70, 1, 0)
-Title.Position = UDim2.new(0, 57, 0, 0)
-Title.BackgroundColor3 = Color3.new(0, 0, 0)
-Title.BorderColor3 = Color3.new(0, 0, 0)
-Title.BorderSizePixel = 1
-Title.Text = "OrionLib"
-Title.TextSize = 20
-Title.BackgroundTransparency = 1
-Title.TextColor3 = Color3.new(1, 1, 1)
-Title.Font = Enum.Font.SourceSansBold
-Title.TextXAlignment = Enum.TextXAlignment.Left
-Title.Parent = cell
+    local cell = SetChildren(SetProps(MakeElement("TextButton"), {
+    Size = UDim2.new(0, 274.5, 0, 50),
+    Position = UDim2.new(0, 0, 0, 0),
+    BackgroundColor3 = Color3.new(0, 0, 0),
+    BorderColor3 = Color3.new(0, 0, 0),
+    BorderSizePixel = 1,
+    Active = true,
+    BackgroundTransparency = 0.27,
+    Draggable = true,
+    Parent = game:GetService("CoreGui").TopBarApp.TopBarFrame.RightFrame.MoreMenu.MoreMenuContainer.ContextualMenu.PositionFrame.BaseMenu.ClippingFrame.ScrollingFrame
+}), {
+    AddThemeObject(SetProps(MakeElement("ImageLabel", "rbxasset://textures/ui/TopBar/leaderboardOff.png"), {
+        Size = UDim2.new(0, 36, 0, 36),
+        Position = UDim2.new(0, 10, 0, 10),
+        BackgroundColor3 = Color3.new(0, 0, 0),
+        BackgroundTransparency = 1,
+        Name = "Ico"
+    }), "Text"),
+    AddThemeObject(SetProps(MakeElement("TextLabel", "OrionLib"), {
+        Size = UDim2.new(1, -70, 1, 0),
+        Position = UDim2.new(0, 57, 0, 0),
+        BackgroundColor3 = Color3.new(0, 0, 0),
+        BorderColor3 = Color3.new(0, 0, 0),
+        BorderSizePixel = 1,
+        TextSize = 20,
+        BackgroundTransparency = 1,
+        TextColor3 = Color3.new(1, 1, 1),
+        Font = Enum.Font.SourceSansBold,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        Name = "Title"
+    }), "Text")
+})
 
 cell.MouseEnter:Connect(function()
     cell.BackgroundTransparency = 0.05
-    icon.Image = "rbxasset://textures/ui/TopBar/leaderboardOff.png"
+    cell.Ico.Image = "rbxasset://textures/ui/TopBar/leaderboardOff.png"
 end)
 
 cell.MouseLeave:Connect(function()
     cell.BackgroundTransparency = 0.27
-    icon.Image = "rbxasset://textures/ui/TopBar/leaderboardOff.png"
+    cell.Ico.Image = "rbxasset://textures/ui/TopBar/leaderboardOff.png"
 end)
 
 local toggleState = false
@@ -676,7 +660,7 @@ local toggleState = false
 cell.MouseButton1Click:Connect(function()
     toggleState = not toggleState
     MainWindow.Visible = not toggleState
-    icon.Image = toggleState and "rbxasset://textures/ui/TopBar/leaderboardOn.png" or "rbxasset://textures/ui/TopBar/leaderboardOff.png"
+    cell.Ico.Image = toggleState and "rbxasset://textures/ui/TopBar/leaderboardOn.png" or "rbxasset://textures/ui/TopBar/leaderboardOff.png"
     print("hello")
 end)
 
