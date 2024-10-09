@@ -672,11 +672,7 @@ end)
 		end
 	end)
 	
-	AddConnection(MobileReopenButton.Activated, function()
-		MainWindow.Visible = true
-		MobileReopenButton.Visible = false
-	end)
-
+	
 	AddConnection(MinimizeBtn.MouseButton1Up, function()
 		if Minimized then
 			TweenService:Create(MainWindow, TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Size = UDim2.new(0, 615, 0, 344)}):Play()
