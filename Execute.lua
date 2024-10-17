@@ -20,7 +20,7 @@ end
 end
 
 function identifyexecutor()
-   return "Executor | Ui Library"
+   return "Executor"
 end
 
 if game.CoreGui:FindFirstChild("Execute") == nil then
@@ -432,7 +432,7 @@ game.CoreGui.Execute.Frame26.Visible = false
 end
 end)
 
-ButtonChoose("Dex V0.5", function()
+ButtonChoose("Dex V0.6", function()
 if game.CoreGui.Execute.Frame29.Visible == false then
 game.CoreGui.Execute.Frame29.Visible = true
 else
@@ -546,7 +546,7 @@ game.CoreGui.Execute.Frame26.Visible = false
 end
 end)
 
-ButtonChooseClone("Dex V0.5", function()
+ButtonChooseClone("Dex V0.6", function()
 if game.CoreGui.Execute.Frame29.Visible == false then
 game.CoreGui.Execute.Frame29.Visible = true
 else
@@ -662,6 +662,10 @@ end)
 
 CreatorButton("Inf Yield", function()
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+end)
+
+CreatorButton("Dex V4", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/DEX-Explorer/main/Mobile.lua"))()
 end)
 
 CreatorButton("Dex V3", function()
@@ -1865,7 +1869,7 @@ local Success, Result = pcall(function()
 	end)
 if not Success then
 Old = game.CoreGui.Execute.Frame26.CheckText.Text
-game.CoreGui.Execute.Frame26.Usernames.Text = "No name in roblox"
+game.CoreGui.Execute.Frame26.Usernames.Text = "Does not exist"
 game.CoreGui.Execute.Frame26.IDName.Text = ""
 game.CoreGui.Execute.Frame26.CheckText.Text = ""
 wait(3)
@@ -2550,7 +2554,7 @@ local TextLabel = Instance.new("TextLabel")
 TextLabel.Size = UDim2.new(1, 0, 0.15, 0)
 TextLabel.Position = UDim2.new(0, 0, 0, 0)
 TextLabel.BackgroundColor3 = Color3.new(255, 255, 255)
-TextLabel.Text = "Dex V0.5"
+TextLabel.Text = "Dex V0.6"
 TextLabel.TextSize = 10
 TextLabel.BackgroundTransparency = 0 
 TextLabel.TextColor3 = Color3.new(0, 0, 0)
@@ -2620,33 +2624,44 @@ local TextBox = Instance.new("TextBox")
 TextBox.Size = UDim2.new(0.94, 0, 0.6, 0)
 TextBox.Position = UDim2.new(0.03, 0, 0.35, 0)
 TextBox.BackgroundColor3 = Color3.new(255,255,255)
-TextBox.Text = ""
+TextBox.Text = "Click target (Get Show, Turn On / OFF)"
 TextBox.TextWrapped = true
 TextBox.ClipsDescendants = true
 TextBox.MultiLine = true
 TextBox.ClearTextOnFocus = false
 TextBox.TextColor3 = Color3.new(0,0,0)
-TextBox.TextSize = 10
+TextBox.TextSize = 12
 TextBox.Parent = Frame29
 
-local mouse = game.Players.LocalPlayer:GetMouse()
-mouse.Button1Down:Connect(function()
-if _G.ToggleDex == true then
-    local target = mouse.Target
-    if target then
-        local path = {}
-        local current = target
-        while current and current.Parent do
-            table.insert(path, 1, current.Name)
-            current = current.Parent
+game.Players.LocalPlayer:GetMouse().Button1Down:Connect(function()
+    if _G.ToggleDex == true then
+        if game.Players.LocalPlayer:GetMouse().Target and game.Players.LocalPlayer:GetMouse().Target:IsDescendantOf(workspace) then
+            local Code = "game.Workspace"
+            local Click = game.Players.LocalPlayer:GetMouse().Target
+            local Parts = {}
+            while Click and Click.Parent and Click.Parent ~= game do
+                table.insert(Parts, 1, Click.Name)
+                Click = Click.Parent
+            end
+            for i, v in ipairs(Parts) do
+                if i == #Parts then
+                    if string.find(v, " ") then
+                        Code = Code..'["'..v..'"]'
+                    else
+                        Code = Code.."."..v
+                    end
+                else
+                    if string.find(v, " ") then
+                        Code = Code..'["'..v..'"]'
+                    else
+                        Code = Code.."."..v
+                    end
+                end
+            end
+            TextBox.Text = Code
+        else
+            TextBox.Text = "No target"
         end
-        if path[#path] ~= "game" then
-            table.insert(path, 1, "game")
-        end
-        TextBox.Text = table.concat(path, " -> ")
-    else
-        TextBox.Text = "No target"
-    end
     end
 end)
 
