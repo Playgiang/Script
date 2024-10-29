@@ -2,23 +2,6 @@ if not game:IsLoaded() then
     game.Loaded:Wait()
 end
 
-if _G.AutoExecuterExe == true then
-local ScriptSpawnExecuteUiLib = queueonteleport or queue_on_teleport
-if ScriptSpawnExecuteUiLib then
-    ScriptSpawnExecuteUiLib([[
-if not game:IsLoaded() then
-    game.Loaded:Wait()
-end
-repeat wait() until game.Players.LocalPlayer
-wait(0.25)
-_G.AutoExecuterExe = true
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Playgiang/Script/main/Execute.lua"))()
-    ]])
-else
-game:GetService("StarterGui"):SetCore("SendNotification",{Title = "Error",Text = "You cannot auto execute",Icon = "rbxassetid://7733658504",Duration = 5})
-end
-end
-
 function identifyexecutor()
    return "Executor"
 end
@@ -127,7 +110,12 @@ if game.CoreGui:FindFirstChild("Execute") and game.CoreGui.Execute:FindFirstChil
 for i,v in pairs(game.CoreGui.Execute.Frame:GetChildren()) do
 if v:IsA("TextBox") then
 if v.Visible == true then
-loadstring(v.Text)()
+local func, err = loadstring(v.Text)
+        if func then
+            pcall(func)
+        else
+            print(err)
+      end
 end
 end
 end
@@ -252,7 +240,12 @@ TextButton.MouseButton1Click:Connect(function()
 for i,v in pairs(game.CoreGui.Execute.Frame:GetChildren()) do
 if v:IsA("TextBox") then
 if v.Visible == true then
-loadstring(v.Text)()
+local func, err = loadstring(v.Text)
+        if func then
+            pcall(func)
+        else
+            print(err)
+      end
 end
 end
 end
@@ -1286,7 +1279,12 @@ ButtonExe.BackgroundTransparency = 0
 ButtonExe.TextColor3 = Color3.new(0, 0, 0)
 ButtonExe.Parent = SaveLabel
 ButtonExe.MouseButton1Click:Connect(function()
-    loadstring(SaveGet.Script)()
+local func, err = loadstring(SaveGet.Script)
+        if func then
+            pcall(func)
+        else
+            print(err)
+      end
 end)
 
 local ButtonDelete = Instance.new("TextButton")
@@ -1412,7 +1410,12 @@ TextButton.TextSize = 9
 TextButton.TextColor3 = Color3.new(0,0,0)
 TextButton.Parent = ImageLabel
 TextButton.MouseButton1Click:Connect(function()
-    loadstring(source)()
+local func, err = loadstring(source)
+        if func then
+            pcall(func)
+        else
+            print(err)
+      end
 end)
 
 local TextButton = Instance.new("TextButton")
