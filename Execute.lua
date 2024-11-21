@@ -658,7 +658,7 @@ loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield
 end)
 
 CreatorButton("Dex V4", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/DEX-Explorer/main/Mobile.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Playgiang/Script/refs/heads/main/Dex-V4-Mobile.lua"))()
 end)
 
 CreatorButton("Dex V3", function()
@@ -781,6 +781,7 @@ SettingL2.BackgroundTransparency = 0
 SettingL2.TextColor3 = Color3.new(0,0,0)
 SettingL2.Parent = SettingSC
 
+_G.ToggleGet = false
 local SettingToggle = Instance.new("ImageButton")
 SettingToggle.Size = UDim2.new(0.14, 0, 0.8, 0)
 SettingToggle.Position = UDim2.new(0.83, 0, 0.1, 0)
@@ -1083,6 +1084,14 @@ v.PlaceholderText = _G.OldText[_G.Tab]
 _G.Tab = _G.Tab + 1
 end
 end
+end
+end
+end)
+
+CreateTextBox("Text Size Execute", {Default = "Size", TextDisappear = false}, function(Value)
+for i,v in pairs(game.CoreGui.Execute.Frame:GetChildren()) do
+if v:IsA("TextBox") then
+v.TextSize = Value
 end
 end
 end)
@@ -2332,8 +2341,20 @@ TextButton.Text = "Teleport"
 TextButton.TextColor3 = Color3.new(0,0,0)
 TextButton.Parent = Frame
 TextButton.MouseButton1Click:Connect(function()
-_G.TeleportGet = tostring(game.CoreGui.Execute.Frame19.Check.Text)
-game.Players.LocalPlayer.Character:MoveTo(_G.TeleportGet)
+local ValuesTele = {}
+for Value in string.gmatch(game.CoreGui.Execute.Frame19.Check.Text, "[^, ]+") do
+            table.insert(ValuesTele, tonumber(Value))
+        end        
+        if #ValuesTele >= 3 then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(ValuesTele[1], ValuesTele[2], ValuesTele[3]))
+        else
+         local success, CheckCFrame = pcall(function()
+            return loadstring("return "..game.CoreGui.Execute.Frame19.Check.Text)()
+        end)
+        if success and typeof(CheckCFrame) == "CFrame" then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CheckCFrame
+        end
+    end
 end)
 
 local TextButton = Instance.new("TextButton")
