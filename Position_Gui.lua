@@ -1,7 +1,7 @@
 if game.CoreGui:FindFirstChild("PositionGui") == nil then
 local gui = Instance.new("ScreenGui")
 gui.Name = "PositionGui"
-gui.Parent = gethui()
+gui.Parent = game.CoreGui
 
 print("Key L [ Off / On Gui ]") 
 print("Key P [ Check ]") 
